@@ -1,25 +1,19 @@
 function* GetPointsOfCircle(n) {
     const r = 1;
     let deltaAngle = Math.PI * 2 / n;
-    let point = [1, 0];
-    let index = 0;
-    let cornerOfPoint = deltaAngle;
-    while (index < n) {
-        if (index > 0) {
-            point[0] = r * Math.cos(cornerOfPoint).toFixed(2);
-            point[1] = r * Math.sin(cornerOfPoint).toFixed(2);
-            cornerOfPoint += deltaAngle;
-        }
+    let angle = deltaAngle;
+    let point = {
+        x: 1,
+        y: 0
+    }
+    for (let i = 0; i < n; i++) {
         yield point;
-        index++;
+        point.x = r * Math.cos(angle);
+        point.y = r * Math.sin(angle);
+        angle += deltaAngle;
     }
 }
 
+const points = Array.from(GetPointsOfCircle(5))
 
-const start = PointsOnCircle(5);
-
-console.log(start.next().value);
-console.log(start.next().value);
-console.log(start.next().value);
-console.log(start.next().value);
-console.log(start.next().value);
+console.log("Points: ", points);
