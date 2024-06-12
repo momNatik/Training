@@ -8,23 +8,36 @@ function* GetPointsOfCircle(x, y, r, n) {
             y: y + r * Math.sin(angle)
         };
         yield point;
-        angle += deltaAngle; 
+        angle += deltaAngle;
     }
 }
-const points = Array.from(GetPointsOfCircle(2, 1, 3, 5))
 
 function* GetSegmenstFromPoints(points) {
-   for (let i = 0; i < points.length - 1; i++) {
-    let segment = {
-        x0: points[i].x,
-        y0: points[i].y,
-        x1: points[i+1].x,
-        y1: points[i+1].y
+    let current = points.next();
+
+    if (current.done) {
+        return;
     }
-    yield segment;
-   }
+
+    let p0 = current.value;
+
+    current = points.next();
+    while (!current.done) {
+        const p1 = current.value;
+        yield {
+            x0: p0.x,
+            y0: p0.y,
+            x1: p1.x,
+            y1: p1.y
+        };
+
+        p0 = p1;
+
+        current = points.next();
+    }
 }
 
-const segments = Array.from(GetSegmenstFromPoints(points));
+const points = GetPointsOfCircle(2, 1, 3, 5);
+const segments = GetSegmenstFromPoints(points);
 
-console.log("Segments: ", segments);
+console.log("Segments: ", [...segments]);
