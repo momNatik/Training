@@ -2,6 +2,15 @@ function* GetPointsOfCircle(x, y, r, n) {
     let deltaAngle = Math.PI * 2 / n;
     let angle = 0;
 
+    function calcPoint(a) {
+        return {
+            x: x + r * Math.cos(a),
+            y: y + r * Math.sin(a)
+        }
+    }
+
+    let p0 = calcPoint(angle);
+
     for (let i = 0; i < n; i++) {
         let point = {
             x: x + r * Math.cos(angle),
