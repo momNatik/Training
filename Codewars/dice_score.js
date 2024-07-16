@@ -1,36 +1,37 @@
-function score(arrayOfDice) {
-    const array = arrayOfDice;
-    let score = 0;
-    const numbersCount = Array(6).fill(0);
+function score(diceRolls) {
+    const sidesRollsSum = Array(6).fill(0);
 
-    for (let i = 0; i < array.length; i++) {
-        const a = array[i];
-        numbersCount[a - 1]++;
+    for (let i = 0; i < diceRolls.length; i++) {
+        const diceSide = diceRolls[i];
+        const sideIndex = diceSide - 1;
+        sidesRollsSum[sideIndex]++;
     }
 
-    function GetScore(diceCount, diceIndex) {
-        if (diceCount == 0) {
-            return
-        }
-        if (diceCount >= 3) {
-            if (diceIndex + 1 == 1) {
-                score += 1000;
-            } else {
-                score += 100 * (diceIndex + 1);
-            }
-            diceCount = diceCount - 3;
+    function GetScore(rollsCount, sideIndex) {
+        let score = 0;
+        const side = sideIndex + 1;
+
+        if (rollsCount == 0) {
+            return 0;
         }
 
-        if (diceIndex + 1 == 1) {
-            score += 100 * diceCount;
-        } else if (diceIndex + 1 == 5) {
-            score += 50 * diceCount;
+        if (rollsCount >= 3) {
+            score += (side == 1) ? 1000 : 100 * side;
+
+            rollsCount = rollsCount - 3;
         }
+
+        score += (side == 1) ? 100 * rollsCount : 0;
+        score += (side == 5) ? 50 * rollsCount : 0;
+
+        return score;
     }
 
-    numbersCount.map(GetScore);
+    const scoreSum = sidesRollsSum
+        .map(GetScore)
+        .reduce((acc, item) => acc + item, 0);
 
-    return score;
+    return scoreSum;
 }
 
 console.log(score([4, 1, 4, 4, 3]));
