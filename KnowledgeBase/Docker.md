@@ -22,6 +22,14 @@ EXPOSE 3000
 CMD ["node", "app.js"]
 ```
 
+There are two forms to define CMD command args
+- shell form: `CMD node app.js myOtherArg`
+- exec form: `CMD ["node", "app.js", "myOtherArg"]`
+
+> When you use shell form, the executable runs as a child process to a shell, which doesn't pass signals. This means that the program running in the container can't detect OS signals like SIGTERM and SIGKILL and respond to them correctly.
+
+[More info](https://docs.docker.com/reference/build-checks/json-args-recommended/#description).
+
 ## .dockerignore file example
 
 ```
