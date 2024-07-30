@@ -48,7 +48,7 @@ node_modules
 
 - pull `docker pull docker/welcome-to-docker`
 - run `docker run -d -p 8088:80 --name name-of-container name-of-image:1.0`
-> -d - run interactive (don't stop process)
+> -d - run interactive (don't stop process). If you don't use -d, logs will show you in terminal 
 
 > -p - ports mapping <exposed_port_number>:<port_inside_container>. See also [docker file, EXPOSE <port_inside_container>](#docker-file-example)
 
