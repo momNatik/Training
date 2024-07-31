@@ -25,7 +25,7 @@ namespace SignalRClientApp
         private static async Task<HubConnection> CreateClient()
         {
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5000/chat")
+                .WithUrl("http://localhost:5015/chat")
                 .Build();
 
             connection.On<string, string>("Receive", (user, message) =>
