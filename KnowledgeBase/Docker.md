@@ -50,7 +50,8 @@ node_modules
 - run `docker run -d -p 8088:80 --name name-of-container name-of-image:1.0`
 > -d - run interactive (don't stop process). If you don't use -d, logs will show you in terminal 
 
-> -p - ports mapping <exposed_port_number>:<port_inside_container>. See also [docker file, EXPOSE <port_inside_container>](#docker-file-example)
+> -p - ports mapping <port_inside_container>:<exposed_port_number>. See also [docker file, EXPOSE <exposed_port_number>](#docker-file-example)
+[More info](https://docs.docker.com/network/#published-ports)
 
 > of name-of-image:latest (make sure to specify the version)
 
